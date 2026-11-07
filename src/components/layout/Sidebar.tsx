@@ -13,6 +13,7 @@ import {
   Tags,
   BadgeCheck,
   FileSpreadsheet,
+  Wallet,
 } from 'lucide-react';
 import { useAuth } from '../../context/AuthContext';
 import { useClients } from '../../context/ClientContext';
@@ -44,6 +45,7 @@ export default function Sidebar() {
     { path: '/clients/new', label: 'Add New Client', icon: UserPlus },
     { path: '/demos', label: 'Demo Projects', icon: Monitor, badge: activeDemosCount > 0 ? activeDemosCount : undefined },
     { path: '/completed', label: 'Completed Projects', icon: BadgeCheck, badge: clients.filter(c => c.projectStatus === 'Completed').length || undefined },
+    { path: '/cash-fund', label: 'Cash Fund', icon: Wallet },
     { path: '/categories', label: 'Categories', icon: Tags },
     { path: '/import', label: 'Import Excel', icon: FileSpreadsheet },
     { path: '/settings', label: 'Settings', icon: Settings },

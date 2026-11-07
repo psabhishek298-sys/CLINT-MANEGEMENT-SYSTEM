@@ -17,6 +17,7 @@ import NotFound from './pages/NotFound';
 import Categories from './pages/Categories';
 import ImportClients from './pages/ImportClients';
 import CompletedProjects from './pages/CompletedProjects';
+import CashFund from './pages/CashFund';
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
                 <Route path="categories" element={<Categories />} />
                 <Route path="import" element={<ImportClients />} />
                 <Route path="completed" element={<CompletedProjects />} />
+                <Route path="cash-fund" element={<CashFund />} />
                 <Route path="settings" element={<Settings />} />
                 <Route path="*" element={<NotFound />} />
               </Route>

@@ -59,6 +59,7 @@ export interface Client {
   websiteProjectUrl: string;
   conversionDate: string;
   completionDate?: string;
+  revenueReceived?: number;
 
   // Metadata
   createdAt: string;

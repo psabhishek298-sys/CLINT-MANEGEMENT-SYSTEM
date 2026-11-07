@@ -26,6 +26,9 @@ export default function ClientForm({ initialData, onSubmit, onCancel, isSubmitti
   const [projectStatus, setProjectStatus] = useState<ProjectStatus>(initialData?.projectStatus || 'New Lead');
   const [websiteProjectUrl, setWebsiteProjectUrl] = useState(initialData?.websiteProjectUrl || '');
   const [completionDate, setCompletionDate] = useState(initialData?.completionDate || '');
+  const [revenueReceived, setRevenueReceived] = useState(
+    initialData?.revenueReceived != null ? String(initialData.revenueReceived) : '',
+  );
   const [errors, setErrors] = useState<Record<string, string>>({});
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -62,6 +65,9 @@ export default function ClientForm({ initialData, onSubmit, onCancel, isSubmitti
       websiteProjectUrl: websiteProjectUrl.trim(),
       conversionDate: initialData?.conversionDate || '',
       completionDate: projectStatus === 'Completed' ? (completionDate || nowDate) : (initialData?.completionDate || ''),
+      revenueReceived: projectStatus === 'Completed' && revenueReceived.trim() !== ''
+        ? Number(revenueReceived)
+        : initialData?.revenueReceived,
     });
   };
 
@@ -108,6 +114,7 @@ export default function ClientForm({ initialData, onSubmit, onCancel, isSubmitti
         {projectStatus === 'Completed' && <>
           <div><label className="label">Project website URL <span className="text-xs font-normal text-gray-400">Optional</span></label><input className="input-field" type="url" value={websiteProjectUrl} onChange={e => setWebsiteProjectUrl(e.target.value)} placeholder="https://client-site.com" /></div>
           {projectStatus === 'Completed' && <div><label className="label"><Calendar size={14} className="mr-1 inline" />Project completed date</label><input className="input-field" type="date" value={completionDate} onChange={e => setCompletionDate(e.target.value)} /></div>}
+          <div><label className="label">Revenue received (₹) <span className="text-xs font-normal text-gray-400">Optional</span></label><input className="input-field" type="number" min="0" step="0.01" inputMode="decimal" value={revenueReceived} onChange={e => setRevenueReceived(e.target.value)} placeholder="0.00" /></div>
         </>}
       </div>
     </section>
