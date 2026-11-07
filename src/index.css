@@ -1,0 +1,152 @@
+@import "tailwindcss";
+
+/* The CRM uses a fixed light theme. Keep Tailwind's dark: utilities from
+   activating automatically when the operating system/browser prefers dark. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --color-primary: #16803c;
+    --color-primary-hover: #126b32;
+    --color-primary-light: #dcfce7;
+    --color-secondary: #277a43;
+    --color-success: #059669;
+    --color-warning: #d97706;
+    --color-danger: #dc2626;
+    --color-info: #0891b2;
+  }
+
+  * {
+    @apply border-gray-200 dark:border-gray-700;
+  }
+
+  body {
+    @apply bg-white text-gray-900 dark:bg-gray-950 dark:text-gray-100 antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-emerald-700 hover:bg-emerald-800 text-white font-medium py-2.5 px-5 rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-100 hover:bg-gray-200 text-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700 dark:text-gray-200 font-medium py-2.5 px-5 rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-danger {
+    @apply bg-red-600 hover:bg-red-700 text-white font-medium py-2.5 px-5 rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+
+  .btn-ghost {
+    @apply bg-transparent hover:bg-gray-100 dark:hover:bg-gray-800 text-gray-600 dark:text-gray-400 font-medium py-2.5 px-5 rounded-lg transition-all duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-900 disabled:opacity-50 disabled:cursor-not-allowed inline-flex items-center justify-center gap-2;
+  }
+
+  .card {
+    @apply bg-white dark:bg-gray-900 rounded-2xl border border-gray-200/80 dark:border-gray-800 shadow-[0_2px_12px_rgba(15,23,42,0.035)];
+  }
+
+  .input-field {
+    @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200;
+  }
+
+  .select-field {
+    @apply w-full px-4 py-2.5 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent transition-all duration-200 appearance-none;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1.5;
+  }
+
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+  }
+}
+
+@layer components {
+  .dashboard-page { --dashboard-accent: #16803c; }
+  .dashboard-heading { position: relative; }
+  .stat-card {
+    position: relative; isolation: isolate; overflow: hidden; min-height: 132px;
+    display: flex; align-items: flex-start; gap: 15px; padding: 20px 18px;
+    border: 1px solid rgba(226,232,230,.9); border-radius: 21px;
+    background: linear-gradient(145deg, rgba(255,255,255,.98), rgba(248,250,248,.96));
+    box-shadow: 0 5px 18px rgba(18,48,29,.055); transition: transform .2s, box-shadow .2s;
+  }
+  .dark .stat-card { background: linear-gradient(145deg, #17221b, #111a14); border-color: #26372c; }
+  .stat-card[role="button"]:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(18,48,29,.11); }
+  .stat-card:focus-visible { outline: 3px solid #86efac; outline-offset: 2px; }
+  .stat-card-icon { position: relative; z-index: 1; width: 51px; height: 51px; flex: 0 0 51px; display: grid; place-items: center; border-radius: 17px; color: #16803c; background: #eaf6ec; }
+  .dark .stat-card-icon { color: #86efac; background: #1c3926; }
+  .stat-card-copy { position: relative; z-index: 1; min-width: 0; }
+  .stat-card-title { margin: 2px 0 4px; color: #33413a; font-size: 14px; font-weight: 700; letter-spacing: -.02em; }
+  .dark .stat-card-title { color: #e5eee7; }
+  .stat-card-value { margin: 0; color: #111916; font-size: 35px; line-height: 1.05; font-weight: 800; letter-spacing: -.045em; }
+  .dark .stat-card-value { color: #f8faf8; }
+  .stat-card-subtext { margin: 5px 0 0; color: #65736b; font-size: 12px; }
+  .dark .stat-card-subtext { color: #a0afa4; }
+  .stat-card-wave { position: absolute; z-index: 0; width: 68%; height: 52px; right: 0; bottom: 0; opacity: .58; }
+  .stat-card-wave path { fill: #e5f4e8; }
+  .dark .stat-card-wave path { fill: #1c3926; }
+  .stat-card-rose .stat-card-icon { color: #dc2626; background: #fff0ef; }
+  .dark .stat-card-rose .stat-card-icon { color: #fca5a5; background: #401f20; }
+  .stat-card-rose .stat-card-wave path { fill: #fde8e6; }
+  .stat-card-amber .stat-card-icon { color: #d18a00; background: #fff6dc; }
+  .stat-card-amber .stat-card-wave path { fill: #fbf1d7; }
+  .stat-card-slate .stat-card-icon { color: #64748b; background: #f1f5f9; }
+  @media (min-width: 1280px) { .dashboard-stats-grid { gap: 14px; } }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 dark:bg-gray-700 rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-400 dark:bg-gray-600;
+}
+
+/* Smooth transitions for theme */
+* {
+  transition-property: background-color, border-color;
+  transition-duration: 150ms;
+  transition-timing-function: ease-in-out;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-8px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-scale-in {
+  animation: scaleIn 0.2s ease-out;
+}
